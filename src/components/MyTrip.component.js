@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
+import axios from 'axios';
 
 export default class MyTrip extends Component {
     constructor(props) {
@@ -7,14 +8,15 @@ export default class MyTrip extends Component {
         
         this.onChangeOrigin = this.onChangeOrigin.bind(this);
         this.onChangeDestination = this.onChangeDestination.bind(this);
-        this.onChangeDate = this.onChagneDate.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangeDays = this.onChangeDays.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
 
 
         this.state ={
             originCity: '',
             destCity: '',
-            startDate: new Date(),
+            departureDate: new Date(),
             days: ''
 
         }
@@ -27,12 +29,12 @@ export default class MyTrip extends Component {
     }
     onChangeDestination(e){
         this.setState({
-            destinationCity: e.target.value
+            destCity: e.target.value
         });
     }
-    onChangeStartDate(startDate){
+    onChangeDate(departureDate){
         this.setState({
-            startDate: startDate
+            departureDate: departureDate.substring(0,10)
         });
     }
     onChangeDays(e){
@@ -41,14 +43,29 @@ export default class MyTrip extends Component {
         });
     }
     onSubmit(e){
+        e.preventDefault();
+
+        // console.log(this.state.originCity);
+
+        let amadeusURL = 'https://test.api.amadeus.com/v1/shopping/flight-offers?origin=' 
+                + this.state.originCity 
+                + '&destination=' + this.state.destCity 
+                + '&departureDate=' + 2019-10-10
         
+        axios.get(amadeusURL,
+            {headers: {
+                "Authorization" : "Bearer bT7k8MEp44TaEKiYuIE3dkQUhIFX"
+            }})
+            .then(res => console.log(res.data))
+        
+        //window.location = '/';
     }
     render() {
         return(
             <div>
                 <h3>MyTrip Details</h3>
-                <form onSubmit={this.onSubmit} />
-                    <div>
+                <form onSubmit={this.onSubmit}>
+                <div className="form-group">
                     <label>Origin City: </label>
                         <input type="text"
                         required
@@ -57,26 +74,28 @@ export default class MyTrip extends Component {
                         onChange={this.onChangeOrigin}
                         />
                     </div>
-                    <div>
+                    <div className="form-group">
                     <label>Destination City: </label>
                         <input type="text"
                         required
                         className="form-control"
-                        value={this.state.destinationCity}
+                        value={this.state.destCity}
                         onChange={this.onChangeDestination}
                         />
-                    </div><div>
+                    </div>
+                    <div className="form-group">
                     <label>Start Date: </label>
                         <DatePicker
-                            selected={this.state.Date}
+                            selected={this.state.departureDate}
                             onChange={this.onChangeDate}
                         />
-                    </div><div>
+                    </div>
+                    <div className="form-group">
                     <label>Number Days: </label>
                         <input type="text"
                         required
                         className="form-control"
-                        value={this.state.Days}
+                        value={this.state.days}
                         onChange={this.onChangeDays}
                         />
                     </div>
