@@ -35,7 +35,7 @@ export default class MyTrip extends Component {
     }
     onChangeDate(departureDate){
         this.setState({
-            departureDate: departureDate.substring(0,10)
+            departureDate: departureDate
         });
     }
     onChangeDays(e){
@@ -55,7 +55,7 @@ export default class MyTrip extends Component {
         
         axios.get(amadeusURL,
             {headers: {
-                "Authorization" : "Bearer bT7k8MEp44TaEKiYuIE3dkQUhIFX"
+                "Authorization" : "Bearer 7Fi6X1vNef0ouT3JvrQmqAT78RWi"
             }})
             .then(res => console.log(res.data))
         
