@@ -35,7 +35,7 @@ export default class MyTrip extends Component {
     }
     onChangeDate(departureDate){
         this.setState({
-            departureDate: departureDate
+            departureDate: departureDate.substring(0,10)
         });
     }
     onChangeDays(e){
@@ -51,11 +51,11 @@ export default class MyTrip extends Component {
         let amadeusURL = 'https://test.api.amadeus.com/v1/shopping/flight-offers?origin=' 
                 + this.state.originCity 
                 + '&destination=' + this.state.destCity 
-                + '&departureDate=' + 2019-10-10
+                + '&departureDate=2019-10-10'
         
         axios.get(amadeusURL,
             {headers: {
-                "Authorization" : "Bearer 7Fi6X1vNef0ouT3JvrQmqAT78RWi"
+                "Authorization" : "Bearer ix2ebUGAnX52pTGVWGrzVQIl22on"
             }})
             .then(res => console.log(res.data))
         
